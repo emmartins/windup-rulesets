@@ -13,6 +13,16 @@
                     <fail message="EJB JAR XML descriptor not found!"/>
                 </perform>
             </rule>
+            <rule>
+                <when>
+                    <not>
+                        <hint-exists message="CMP Entity EJB not supported in WildFly"/>
+                    </not>
+                </when>
+                <perform>
+                    <fail message="CMP Entity EJB hint not found!"/>
+                </perform>
+            </rule>
         </rules>
     </ruleset>
 </ruletest>

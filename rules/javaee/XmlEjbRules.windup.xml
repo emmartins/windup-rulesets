@@ -3,15 +3,30 @@
     <rules>
         <rule id="XmlEjbRules_2fmb">
             <when>
-                <xmlfile as="ejb" matches="/ejb-jar | /j2e:ejb-jar | /jee:ejb-jar | /jcp:ejb-jar">
+                <xmlfile as="default" matches="/ejb-jar | /j2e:ejb-jar | /jee:ejb-jar | /jcp:ejb-jar">
                     <namespace prefix="j2e" uri="http://java.sun.com/xml/ns/j2ee"/>
                     <namespace prefix="jee" uri="http://java.sun.com/xml/ns/javaee"/>
                     <namespace prefix="jcp" uri="http://xmlns.jcp.org/xml/ns/javaee"/>
                 </xmlfile>
             </when>
             <perform>
-                <iteration over="ejb">
+                <iteration>
                     <classification classification="EJB XML" effort="0"/>
+                </iteration>
+            </perform>
+        </rule>
+        <rule id="XmlEjbRules_2fmc">
+            <when>
+                <xmlfile as="default" matches="/ejb-jar/enterprise-beans/entity[persistence-type = 'Container'] | /jee:ejb-jar/jee:enterprise-beans/jee:entity[jee:persistence-type = 'Container'] | /j2e:ejb-jar/j2e:enterprise-beans/j2e:entity[j2e:persistence-type = 'Container'] | /jcp:ejb-jar/jcp:enterprise-beans/jcp:entity[jcp:persistence-type = 'Container']">
+                    <namespace prefix="j2e" uri="http://java.sun.com/xml/ns/j2ee"/>
+                    <namespace prefix="jee" uri="http://java.sun.com/xml/ns/javaee"/>
+                    <namespace prefix="jcp" uri="http://xmlns.jcp.org/xml/ns/javaee"/>
+                </xmlfile>
+            </when>
+            <perform>
+                <iteration>
+                    <hint message="CMP Entity EJB not supported in WildFly" effort="20">
+                    </hint>
                 </iteration>
             </perform>
         </rule>

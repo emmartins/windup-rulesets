@@ -9,7 +9,7 @@
             <local-home>org.jboss.as.test.integration.ejb.entity.bmp.BMPLocalHome</local-home>
             <local>org.jboss.as.test.integration.ejb.entity.bmp.BMPLocalInterface</local>
             <ejb-class>org.jboss.as.test.integration.ejb.entity.bmp.SimpleBMPBean</ejb-class>
-            <persistence-type>Bean</persistence-type>
+            <persistence-type>Container</persistence-type>
             <prim-key-class>java.lang.Integer</prim-key-class>
             <reentrant>true</reentrant>
         </entity>
