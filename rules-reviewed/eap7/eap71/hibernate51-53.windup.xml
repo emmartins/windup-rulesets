@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<ruleset xmlns="http://windup.jboss.org/schema/jboss-ruleset" id="hibernate51-53"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://windup.jboss.org/schema/jboss-ruleset http://windup.jboss.org/schema/jboss-ruleset/windup-jboss-ruleset.xsd">
+    <metadata>
+        <description>
+            This ruleset provides analysis of applications that use Hibernate 5.1 and may require
+            individual attention when migrating to Hibernate 5.3.
+        </description>
+        <dependencies>
+            <addon id="org.jboss.windup.rules,windup-rules-javaee,3.0.0.Final" />
+            <addon id="org.jboss.windup.rules,windup-rules-java,3.0.0.Final" />
+        </dependencies>
+        <sourceTechnology id="hibernate" versionRange="(,5.1]" />
+        <sourceTechnology id="eap" versionRange="(,7.1]" />
+        <targetTechnology id="hibernate" versionRange="[5.3,)" />
+        <targetTechnology id="eap" versionRange="[7.2,)" />
+    </metadata>
+    <rules>
+        <rule id="hibernate51-53-00000">
+            <when>
+                <javaclass references="org.hibernate.{package-remainder}.{type}">
+                    <location>IMPORT</location>
+                </javaclass>
+            </when>
+            <perform>
+                <iteration>
+                    <when>
+                        <not>
+                            <has-hint />
+                        </not>
+                    </when>
+                    <perform>
+                        <hint title="Hibernate 5.3 Compatibility Issues" effort="1" category-id="optional">
+                            <message>Hibernate 5.3 has compatibility issues with previous versions, which may require changes in the application sources. Please refer to the JBoss EAP 7.2 platform migration guide</message>
+                            <link href="https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.2.beta" title="JBoss EAP 7.2 Documentation"/>
+                            <tag>Hibernate</tag>
+                        </hint>
+                    </perform>
+                </iteration>
+            </perform>
+            <where param="package-remainder">
+                <matches pattern="(.*)?" />
+            </where>
+            <where param="type">
+                <matches pattern="[^.]+" />
+            </where>
+        </rule>
+    </rules>
+</ruleset>
