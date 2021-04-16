@@ -18,9 +18,9 @@
         <!-- https://issues.jboss.org/browse/WINDUPRULE-738 -->
         <rule id="eapxp-thorntail-replace_thorntail_boms-1">
             <when>
-                <project>
-                    <artifact groupId="io.thorntail" artifactId="bom" />
-                </project>
+                <xmlfile matches="/m:project/m:dependencyManagement/m:dependencies/m:dependency[m:groupId/text() = 'io.thorntail' and m:artifactId/text() = 'bom']" in="pom.xml">
+                    <namespace prefix="m" uri="http://maven.apache.org/POM/4.0.0"/>
+                </xmlfile>
             </when>
             <perform>
                 <hint title="Replace Thorntail BOMs - io.thorntail:bom" effort="1" category-id="potential">
@@ -32,9 +32,9 @@
         </rule>
         <rule id="eapxp-thorntail-replace_thorntail_boms-2">
             <when>
-                <project>
-                    <artifact groupId="io.thorntail" artifactId="bom-certified" />
-                </project>
+                <xmlfile matches="/m:project/m:dependencyManagement/m:dependencies/m:dependency[m:groupId/text() = 'io.thorntail' and m:artifactId/text() = 'bom-certified']" in="pom.xml">
+                    <namespace prefix="m" uri="http://maven.apache.org/POM/4.0.0"/>
+                </xmlfile>
             </when>
             <perform>
                 <hint title="Replace Thorntail BOMs - io.thorntail:bom-certified" effort="1" category-id="potential">
